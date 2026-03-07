@@ -1,0 +1,92 @@
+@use 'variables' as *;
+
+.fpam-ui {
+  .app-header {
+    background: $color-surface;
+    padding: $space-7 $space-8 $space-6;
+    box-shadow: $shadow-soft;
+  }
+
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: $space-5;
+  }
+
+  .header-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: $space-3;
+  }
+
+  .app-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: $space-6 $space-8 $space-8;
+    display: flex;
+    flex-direction: column;
+    gap: $space-6;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: $space-4;
+  }
+
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: $space-4;
+  }
+
+  .panel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: $space-4;
+  }
+
+  .panel {
+    background: $color-surface;
+    border-radius: $radius-lg;
+    padding: $space-5;
+    box-shadow: $shadow-card;
+  }
+
+  .panel-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-3;
+    margin-bottom: $space-4;
+
+    p {
+      margin-top: $space-1;
+    }
+  }
+
+  .panel-body {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+  }
+
+  .app-footer {
+    padding: $space-5 $space-8 $space-6;
+    text-align: center;
+    color: $color-muted;
+  }
+
+  @media (max-width: 768px) {
+    .app-header {
+      padding: $space-6 $space-5;
+    }
+
+    .app-main {
+      padding: $space-5;
+    }
+  }
+}

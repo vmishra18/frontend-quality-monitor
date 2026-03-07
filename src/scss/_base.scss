@@ -1,0 +1,74 @@
+@use 'variables' as *;
+
+.fpam-ui,
+.fpam-ui * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: $color-bg;
+}
+
+.fpam-ui {
+  font-family: $font-body;
+  color: $color-text;
+  background: $color-bg;
+  line-height: 1.5;
+  min-height: 100%;
+}
+
+.fpam-ui h1,
+.fpam-ui h2,
+.fpam-ui h3 {
+  font-family: $font-display;
+  margin: 0;
+  color: $color-text;
+}
+
+.fpam-ui p {
+  margin: 0;
+  color: $color-muted;
+}
+
+.fpam-ui a {
+  color: inherit;
+}
+
+.fpam-ui table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.fpam-ui thead th {
+  text-align: left;
+  padding: $space-2 $space-3;
+  color: $color-muted;
+  font-weight: 600;
+  border-bottom: 1px solid $color-border;
+}
+
+.fpam-ui tbody td {
+  padding: $space-2 $space-3;
+  border-bottom: 1px solid $color-border;
+}
+
+.fpam-ui button {
+  font-family: $font-body;
+}
+
+.fpam-ui .skip-link {
+  position: absolute;
+  left: -999px;
+  top: $space-3;
+  background: $color-accent;
+  color: #fff;
+  padding: $space-2 $space-3;
+  border-radius: $radius-sm;
+  z-index: 5;
+
+  &:focus {
+    left: $space-3;
+  }
+}

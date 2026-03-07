@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frontend Quality Monitor</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+  <noscript>This tool requires JavaScript to run.</noscript>
+  <div id="fpam-root" class="fpam-ui">
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <header class="app-header">
+      <div class="header-content">
+        <div>
+          <p class="eyebrow">Overview</p>
+          <h1>Frontend Quality Monitor</h1>
+          <p class="subtitle">Lightweight dashboard for Web Vitals, timing, and quick accessibility checks.</p>
+        </div>
+        <nav class="top-nav" aria-label="Sections">
+          <a href="#overview">Overview</a>
+          <a href="#metrics">Metrics</a>
+          <a href="#accessibility">Accessibility</a>
+          <a href="#tests">Tests</a>
+        </nav>
+        <div class="header-meta">
+          <div class="meta-card">
+            <span class="meta-label">Environment</span>
+            <span class="meta-value">Local</span>
+          </div>
+          <div class="meta-card">
+            <span class="meta-label">Session Started</span>
+            <span class="meta-value" id="session-start">--</span>
+          </div>
+          <div class="meta-card">
+            <span class="meta-label">Viewport</span>
+            <span class="meta-value" id="viewport-size">--</span>
+          </div>
+          <div class="meta-card">
+            <span class="meta-label">Network (est.)</span>
+            <span class="meta-value" id="network-info">--</span>
+          </div>
+          <div class="meta-card">
+            <span class="meta-label">Last Update</span>
+            <span class="meta-value" id="last-update">--</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="app-main">
+      <section id="overview" class="summary-grid">
+        <article class="summary-card" id="overall-status-card">
+          <div>
+            <p class="card-label">Overall Status</p>
+            <h2 id="overall-status" class="status-text">--</h2>
+            <p class="card-note" id="overall-status-note">Waiting for first readings.</p>
+          </div>
+          <div class="status-indicator" id="overall-status-indicator">--</div>
+        </article>
+        <article class="summary-card">
+          <p class="card-label">Navigation Timing</p>
+          <div class="summary-metrics">
+            <div>
+              <span class="summary-value" id="summary-ttfb">--</span>
+              <span class="summary-label">TTFB</span>
+            </div>
+            <div>
+              <span class="summary-value" id="summary-dom">--</span>
+              <span class="summary-label">DOMContentLoaded</span>
+            </div>
+            <div>
+              <span class="summary-value" id="summary-load">--</span>
+              <span class="summary-label">Load Event</span>
+            </div>
+          </div>
+          <p class="card-note">Based on the Navigation Timing entry.</p>
+        </article>
+      </section>
+
+      <section id="metrics" class="metric-grid">
+        <article class="metric-card" data-metric="LCP">
+          <div>
+            <p class="card-label">Largest Contentful Paint</p>
+            <h3 id="metric-lcp" class="metric-value">--</h3>
+            <p class="metric-status" id="metric-lcp-status">--</p>
+          </div>
+        </article>
+        <article class="metric-card" data-metric="FCP">
+          <div>
+            <p class="card-label">First Contentful Paint</p>
+            <h3 id="metric-fcp" class="metric-value">--</h3>
+            <p class="metric-status" id="metric-fcp-status">--</p>
+          </div>
+        </article>
+        <article class="metric-card" data-metric="CLS">
+          <div>
+            <p class="card-label">Cumulative Layout Shift</p>
+            <h3 id="metric-cls" class="metric-value">--</h3>
+            <p class="metric-status" id="metric-cls-status">--</p>
+          </div>
+        </article>
+        <article class="metric-card" data-metric="INP">
+          <div>
+            <p class="card-label">Interaction to Next Paint</p>
+            <h3 id="metric-inp" class="metric-value">--</h3>
+            <p class="metric-status" id="metric-inp-status">--</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel-grid">
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Vitals timing</h2>
+              <p>Time-based vitals only (LCP, FCP, INP). CLS is shown separately above.</p>
+            </div>
+            <div class="legend">
+              <span class="legend-chip good">Good</span>
+              <span class="legend-chip needs">Needs Improvement</span>
+              <span class="legend-chip poor">Poor</span>
+            </div>
+          </div>
+          <div class="panel-body">
+            <canvas id="vitals-chart" height="140" role="img" aria-label="Timing-related Web Vitals chart">
+              Your browser does not support canvas.
+            </canvas>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Navigation timing</h2>
+              <p>Key milestones for the current navigation.</p>
+            </div>
+          </div>
+          <div class="panel-body">
+            <canvas id="navigation-chart" height="140" role="img" aria-label="Navigation timing breakdown chart">
+              Your browser does not support canvas.
+            </canvas>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Time to First Byte</td>
+                    <td id="nav-ttfb">--</td>
+                  </tr>
+                  <tr>
+                    <td>Response Duration</td>
+                    <td id="nav-response">--</td>
+                  </tr>
+                  <tr>
+                    <td>DOM Interactive</td>
+                    <td id="nav-interactive">--</td>
+                  </tr>
+                  <tr>
+                    <td>DOMContentLoaded</td>
+                    <td id="nav-dom">--</td>
+                  </tr>
+                  <tr>
+                    <td>Load Event</td>
+                    <td id="nav-load">--</td>
+                  </tr>
+                  <tr>
+                    <td>Transfer Size</td>
+                    <td id="nav-transfer">--</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section id="accessibility" class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>Accessibility checks</h2>
+            <p>Quick heuristic checks for obvious issues. Manual review still recommended.</p>
+          </div>
+          <button class="btn" id="run-a11y">Run accessibility scan</button>
+        </div>
+        <div class="panel-body">
+          <div class="a11y-summary">
+            <div>
+              <span class="summary-value" id="a11y-score">--</span>
+              <span class="summary-label">Checks Passed</span>
+            </div>
+            <div>
+              <span class="summary-value" id="a11y-issues">--</span>
+              <span class="summary-label">Potential Issues</span>
+            </div>
+            <div>
+              <span class="summary-value" id="a11y-manual">--</span>
+              <span class="summary-label">Manual Review</span>
+            </div>
+            <div>
+              <span class="summary-value" id="a11y-last-run">--</span>
+              <span class="summary-label">Last Run</span>
+            </div>
+          </div>
+          <div class="a11y-grid" id="a11y-list"></div>
+          <div class="a11y-notes">
+            <h3>Notes</h3>
+            <ul>
+              <li>Contrast needs real colors and states. Verify with a checker during QA.</li>
+              <li>Keyboard support should include visible focus states and a sane tab order.</li>
+              <li>Landmarks improve screen reader navigation and audit results.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="tests" class="panel interaction-panel">
+        <div class="panel-header">
+          <div>
+            <h2>Test interactions</h2>
+            <p>Use these two controls to generate sample interactions.</p>
+          </div>
+          <button class="btn btn-secondary" id="simulate-cls">Add layout shift</button>
+        </div>
+        <div class="panel-body">
+          <div id="cls-spacer" class="cls-spacer" aria-hidden="true"></div>
+          <div class="interaction-grid">
+            <div class="interaction-item">
+              <label for="demo-input">Typing (INP)</label>
+              <input id="demo-input" type="text" placeholder="Type to create interaction samples" />
+              <span class="help">Keystrokes update INP for this session.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>Internal QA view to keep performance and accessibility visible during development.</p>
+    </footer>
+  </div>
+
+  <script src="js/bundle.js"></script>
+</body>
+</html>

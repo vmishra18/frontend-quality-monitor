@@ -1,0 +1,60 @@
+@use 'variables' as *;
+
+.fpam-ui {
+  .good {
+    background: rgba(46, 125, 50, 0.12);
+    color: $color-good;
+  }
+
+  .needs {
+    background: rgba(197, 106, 0, 0.12);
+    color: $color-needs;
+  }
+
+  .poor {
+    background: rgba(198, 40, 40, 0.12);
+    color: $color-poor;
+  }
+
+  .collecting {
+    background: rgba(95, 108, 123, 0.12);
+    color: $color-muted;
+  }
+
+  .manual {
+    background: rgba(47, 111, 237, 0.12);
+    color: $color-accent;
+  }
+
+  .status-good {
+    color: $color-good;
+  }
+
+  .status-needs {
+    color: $color-needs;
+  }
+
+  .status-poor {
+    color: $color-poor;
+  }
+
+  .status-manual {
+    color: $color-accent;
+  }
+
+  .status-collecting {
+    color: $color-muted;
+  }
+
+  .status-awaiting {
+    color: $color-accent;
+  }
+
+  .status-unsupported {
+    color: $color-muted;
+  }
+
+  .text-muted {
+    color: $color-muted;
+  }
+}

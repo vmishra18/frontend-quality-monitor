@@ -2,6 +2,8 @@
 
 This is a small, local dashboard that reports on the page it’s running on. It shows Web Vitals, basic navigation timing, and a few quick accessibility checks during development.
 
+Live demo: <https://vmishra18.github.io/frontend-quality-monitor/>
+
 ## What it does
 
 - Collects LCP, FCP, CLS, and INP with `web-vitals`

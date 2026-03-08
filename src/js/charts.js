@@ -1,5 +1,14 @@
 const Chart = require('chart.js/auto');
-const { formatMs } = require('./utils');
+const { formatMs, getStatus } = require('./utils');
+
+const STATUS_COLORS = {
+  Good: '#2e7d32',
+  'Needs Improvement': '#c56a00',
+  Poor: '#c62828',
+  Collecting: '#8aa1b4',
+  'Awaiting interaction': '#8aa1b4',
+  'Not Supported': '#8aa1b4'
+};
 
 function createCharts() {
   const vitalsCtx = document.getElementById('vitals-chart');
@@ -126,8 +135,16 @@ function createCharts() {
       const value = metrics[key];
       return value === null || value === undefined || Number.isNaN(value) ? null : value;
     };
-    const data = [toChartValue('LCP'), toChartValue('FCP'), toChartValue('INP')];
+    const metricKeys = ['LCP', 'FCP', 'INP'];
+    const data = metricKeys.map((key) => toChartValue(key));
+    const colors = metricKeys.map((key) => {
+      const supported = supports[key] !== false;
+      const value = metrics[key];
+      const status = getStatus(key, value, supported).label;
+      return STATUS_COLORS[status] || '#8aa1b4';
+    });
     vitalsChart.data.datasets[0].data = data;
+    vitalsChart.data.datasets[0].backgroundColor = colors;
     vitalsChart.update();
   };
 

@@ -54,6 +54,7 @@ function getNavigationTimings() {
     };
   }
 
+  // Legacy fallback for older browsers.
   const timing = performance.timing;
   if (!timing) {
     return null;

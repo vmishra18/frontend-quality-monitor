@@ -31,12 +31,19 @@ function init() {
   updateNavigation(navTimings);
   charts.updateNavigation(navTimings);
 
-  // Update navigation timing again after full load to capture loadEventEnd.
-  window.addEventListener('load', () => {
+  const refreshNavigationTimings = () => {
     const updatedTimings = getNavigationTimings();
     updateNavigation(updatedTimings);
     charts.updateNavigation(updatedTimings);
-  });
+  };
+
+  // Update navigation timing again after full load to capture loadEventEnd.
+  window.addEventListener('load', refreshNavigationTimings);
+
+  // If the load event already fired, refresh immediately.
+  if (document.readyState === 'complete') {
+    refreshNavigationTimings();
+  }
 
   const initialMetrics = collectVitals((metrics) => {
     updateMetrics(metrics);

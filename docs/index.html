@@ -61,7 +61,7 @@
           <div class="status-indicator" id="overall-status-indicator">--</div>
         </article>
         <article class="summary-card">
-          <p class="card-label">Navigation Timing</p>
+          <p class="card-label">Navigation Snapshot</p>
           <div class="summary-metrics">
             <div>
               <span class="summary-value" id="summary-ttfb">--</span>
@@ -69,7 +69,7 @@
             </div>
             <div>
               <span class="summary-value" id="summary-dom">--</span>
-              <span class="summary-label">DOMContentLoaded</span>
+              <span class="summary-label">DOMContent Loaded</span>
             </div>
             <div>
               <span class="summary-value" id="summary-load">--</span>
@@ -116,7 +116,7 @@
           <div class="panel-header">
             <div>
               <h2>Vitals timing</h2>
-              <p>Time-based vitals only (LCP, FCP, INP). CLS is shown separately above.</p>
+              <p>Time-based vitals only (LCP, FCP, INP).</p>
             </div>
             <div class="legend">
               <span class="legend-chip good">Good</span>
@@ -125,7 +125,7 @@
             </div>
           </div>
           <div class="panel-body">
-            <canvas id="vitals-chart" height="140" role="img" aria-label="Timing-related Web Vitals chart">
+            <canvas id="vitals-chart" height="360" role="img" aria-label="Timing-related Web Vitals chart">
               Your browser does not support canvas.
             </canvas>
           </div>
@@ -186,7 +186,7 @@
         <div class="panel-header">
           <div>
             <h2>Accessibility checks</h2>
-            <p>Quick heuristic checks for obvious issues. Manual review still recommended.</p>
+            <p>Quick automated checks to highlight obvious issues. A manual review is still recommended.</p>
           </div>
           <button class="btn" id="run-a11y">Run accessibility scan</button>
         </div>

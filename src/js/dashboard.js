@@ -62,8 +62,8 @@ function updateSummary(metrics) {
 function updateNavigation(timings) {
   if (!timings) return;
 
-  const formatNavValue = (value) => (value === null || value === undefined ? 'Collecting' : formatMs(value));
-  const formatNavBytes = (value) => (value === null || value === undefined ? 'Collecting' : formatBytes(value));
+  const formatNavValue = (value) => (value === null || value === undefined ? 'Not available' : formatMs(value));
+  const formatNavBytes = (value) => (value === null || value === undefined ? 'Not available' : formatBytes(value));
 
   const map = [
     { id: 'summary-ttfb', value: formatNavValue(timings.ttfb) },

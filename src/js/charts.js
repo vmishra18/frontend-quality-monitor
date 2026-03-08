@@ -39,6 +39,11 @@ function createCharts() {
     },
     options: {
       responsive: true,
+      layout: {
+        padding: {
+          top: 10
+        }
+      },
       plugins: {
         legend: { display: false },
         tooltip: {
@@ -90,15 +95,23 @@ function createCharts() {
         {
           label: 'Milliseconds',
           data: [0, 0, 0, 0, 0],
-          backgroundColor: '#1f2933',
+          backgroundColor: '#2f6fed',
           borderRadius: 8,
-          barThickness: 22
+          barThickness: 18,
+          barPercentage: 0.6,
+          categoryPercentage: 0.7
         }
       ]
     },
     options: {
       indexAxis: 'y',
       responsive: true,
+      layout: {
+        padding: {
+          top: 6,
+          bottom: 6
+        }
+      },
       plugins: {
         legend: { display: false }
       },

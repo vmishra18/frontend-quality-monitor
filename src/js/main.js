@@ -38,7 +38,10 @@ function init() {
   };
 
   // Update navigation timing again after full load to capture loadEventEnd.
-  window.addEventListener('load', refreshNavigationTimings);
+  window.addEventListener('load', () => {
+    refreshNavigationTimings();
+    window.setTimeout(refreshNavigationTimings, 250);
+  });
 
   // If the load event already fired, refresh immediately.
   if (document.readyState === 'complete') {

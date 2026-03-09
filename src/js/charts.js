@@ -87,17 +87,22 @@ function createCharts() {
 
   let navChart;
   try {
+    const navLabels = ['TTFB', 'Response', 'DOM Int', 'DCL', 'Load'];
+    const isCompactNav = window.innerWidth < 520;
+    const navBarThickness = isCompactNav ? 12 : 18;
+    const navTickFontSize = isCompactNav ? 9 : 12;
+    navCtx.height = isCompactNav ? 180 : 140;
     navChart = new Chart(navCtx, {
     type: 'bar',
     data: {
-      labels: ['TTFB', 'Response', 'DOM Interactive', 'DOMContentLoaded', 'Load'],
+      labels: navLabels,
       datasets: [
         {
           label: 'Milliseconds',
           data: [0, 0, 0, 0, 0],
           backgroundColor: '#2f6fed',
           borderRadius: 8,
-          barThickness: 18,
+          barThickness: navBarThickness,
           barPercentage: 0.6,
           categoryPercentage: 0.7
         }
@@ -127,7 +132,12 @@ function createCharts() {
         },
         y: {
           ticks: {
-            color: '#3d4853'
+            color: '#3d4853',
+            autoSkip: false,
+            padding: 4,
+            font: {
+              size: navTickFontSize
+            }
           }
         }
       }

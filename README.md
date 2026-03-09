@@ -1,67 +1,30 @@
 # Frontend Quality Monitor
 
-This is a small, local dashboard that reports on the page it’s running on. It shows Web Vitals, basic navigation timing, and a few quick accessibility checks during development.
+I built this as a lightweight, local dashboard to keep performance and accessibility visible while you’re developing. It runs on the page it’s loaded into and doesn’t send data anywhere.
 
 Live demo: <https://vmishra18.github.io/frontend-quality-monitor/>
 
-## What it does
+## What it shows
 
-- Collects LCP, FCP, CLS, and INP with `web-vitals`
-- Reads Navigation Timing (TTFB, DOMContentLoaded, Load Event) from the Performance API
-- Runs a small accessibility scan on the current page (labels, headings, landmarks, keyboard reachability)
-- Renders the results in a simple dashboard with charts
+- Web Vitals: LCP, FCP, CLS, INP
+- Navigation Timing: TTFB, DOMContentLoaded, Load Event
+- Quick a11y checks: labels, headings, landmarks, keyboard reachability
 
-## Architecture
+## How it’s organized
 
-- `src/js/main.js` bootstraps the app and wires up events
-- `src/js/metrics.js` collects Web Vitals and navigation timing
-- `src/js/accessibility.js` runs the lightweight accessibility scan
-- `src/js/dashboard.js` updates the DOM and UI state
-- `src/js/charts.js` renders the Chart.js visualizations
+- `src/js/main.js` boots the app and wires events
+- `src/js/metrics.js` collects Web Vitals + navigation timing
+- `src/js/accessibility.js` runs the lightweight a11y scan
+- `src/js/dashboard.js` updates the UI state
+- `src/js/charts.js` renders Chart.js charts
+- `src/scss/` holds layout + component styles
 
-## What it does not do
+## Limits (on purpose)
 
-- It does not scan other websites
-- It does not run full WCAG audits
-- It does not store results between page reloads
-
-## Trade‑offs
-
-- The accessibility scan is a heuristic pass, not a full audit
-- Metrics are session‑based and depend on browser support
-- Some metrics aren’t available everywhere (Safari will show “Not Supported” for a few)
-- Chart.js is heavier than a custom SVG chart, but it keeps the visuals readable
-
-## Known limitations
-
-- Metrics are page/session dependent, so they are not comparable across different environments.
-
-## What I kept simple
-
-- No framework, no backend, no database
-- Single‑page UI with small JS modules
-- Only checks that are quick to run and easy to explain
-
-## Next improvements
-
-- Keep a short history for each metric
-- Export a JSON report
-- Let teams toggle which checks run
-
-## Testing
-
-There’s a small test layer for the utility functions (status calculation and formatting). It’s minimal, but it shows how the logic can be validated.
-
-```bash
-npm test
-```
-
-## Browser support
-
-The dashboard relies on Web Vitals and the Navigation Timing API.
-INP and some timing fields depend on browser support and user interaction.
-If a metric isn’t supported, the UI shows “Not Supported” or “Collecting.”
-For older browsers, navigation timing falls back to `performance.timing`.
+- Only reports on the current page
+- A11y scan is heuristic, not a full WCAG audit
+- Metrics are session-based and vary by environment
+- Some timing fields are browser-dependent
 
 ## Run locally
 
@@ -75,3 +38,21 @@ npm run dev
 ```bash
 npm run build
 ```
+
+## GitHub Pages
+
+This repo uses `docs/` for GitHub Pages. After building, copy `dist/` into `docs/` and push.
+
+```bash
+npm run build
+rsync -a --delete dist/ docs/
+```
+
+## Future improvements
+
+- Separate the monitoring logic from the dashboard UI so the metrics collection layer can run independently across different pages
+- Introduce a lightweight floating widget that surfaces key performance and accessibility metrics directly on the monitored page
+- Support two UI layers for the same metrics
+- Widget UI for quick insights on the page being monitored
+- Expanded dashboard UI for detailed analysis
+- Expand unit and integration test coverage

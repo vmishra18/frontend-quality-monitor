@@ -19,12 +19,12 @@ Live demo: <https://vmishra18.github.io/frontend-quality-monitor/>
 - `src/js/charts.js` renders Chart.js charts
 - `src/scss/` holds layout + component styles
 
-## Limits (on purpose)
+## Limitations
 
 - Only reports on the current page
 - A11y scan is heuristic, not a full WCAG audit
 - Metrics are session-based and vary by environment
-- Some timing fields are browser-dependent
+- Some metrics rely on browser performance APIs, so results can vary between browsers. For example, Safari doesn’t support all of these APIs yet, so a few values may not appear there.
 
 ## Run locally
 
